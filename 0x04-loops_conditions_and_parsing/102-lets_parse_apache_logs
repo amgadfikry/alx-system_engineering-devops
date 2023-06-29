@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# script that print ip and http code status in apache server
+awk '{print $1, $9}' apache-access.log
