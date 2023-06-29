@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# script print username, id and home directory only
+while read -r line
+do
+	echo "$line" | cut -d ":" -f 1,3,6
+done < /etc/passwd
