@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# script display bash processes and it's id
+pgrep -l "bash"
