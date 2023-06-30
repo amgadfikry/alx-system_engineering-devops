@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# script that stop another one without kill or kill all
+pkill -f "7-highlander"
