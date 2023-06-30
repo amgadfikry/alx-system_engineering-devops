@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# script that displatext with sleep 2 in between
+i=1
+while [ $i -gt 0 ]
+do
+	echo "To infinity and beyond"
+	sleep 2
+done
