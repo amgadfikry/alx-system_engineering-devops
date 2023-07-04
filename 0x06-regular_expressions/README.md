@@ -15,7 +15,6 @@
 ### Tasks
 
 #### 0-simply_match_school.rb
-![task 0](https://www.dropbox.com/s/7wt3jgu7i5gglv3/0.png?dl=0)
 Requirements:
 
 - The regular expression must match School
