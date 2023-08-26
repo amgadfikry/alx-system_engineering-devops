@@ -1,7 +1,7 @@
 # change ssh config file
 file { 'Turn off passwd auth':
   path  => '/etc/ssh/ssh_config',
-  match => '	PasswordAuthentication yes',
+  match => '^	PasswordAuthentication',
   line  => 'PasswordAuthentication no'
 }
 file { 'Declare identity file'}:
