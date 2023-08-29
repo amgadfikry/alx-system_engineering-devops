@@ -4,6 +4,8 @@
 sudo apt-get -y update
 sudo apt-get -y install nginx
 sudo service nginx start
+sudo touch /var/www/html/index.html && sudo chmod 777 /var/www/html/index.html
+echo "Hello World!" | sudo tee /var/www/html/index.html
 url="\trewrite ^/(.*)$ http://www.youtube.com permanent;"
 sudo sed -i "/server_name _;/a $url" /etc/nginx/sites-available/default
 sudo service nginx restart
