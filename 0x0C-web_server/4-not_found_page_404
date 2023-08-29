@@ -4,21 +4,20 @@
 sudo apt-get -y update
 sudo apt-get -y install nginx
 sudo service nginx start
-sudo touch /var/www/html/index.html && sudo chmod 777 /var/www/html/index.html
 echo "Hello World!" | sudo tee /var/www/html/index.html
-sudo touch /usr/share/nginx/html/error.html && sudo chmod 777 /usr/share/nginx/html/error.html
-echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/error.html
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html
 content=$(cat << 'END_HEREDOC'
-        rewrite ^/(.*)$ http://www.youtube.com permanent;
+	rewrite ^/(.*)$ http://www.youtube.com permanent;
 
-        error_page 404 /error.html;
-        location = /error.html {
-                root /usr/share/nginx/html;
-                internal;
-        }
+	error_page 404 /custom_404.html;
+	location = /custom_404.html {
+		root /usr/share/nginx/html;
+		internal;
+	}
 END_HEREDOC
 )
 echo -e "$content" >> lines.txt
 sudo sed -i "/server_name _;/r lines.txt" /etc/nginx/sites-available/default
 sudo rm lines.txt
-sudo service nginx restart
+sudo service nginx reload
+~                          
