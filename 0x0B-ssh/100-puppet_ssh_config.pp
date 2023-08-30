@@ -1,10 +1,9 @@
 # change ssh config file
-file { 'Turn off passwd auth':
-  path  => '/etc/ssh/ssh_config',
-  match => '^	PasswordAuthentication',
-  line  => 'PasswordAuthentication no'
+exec { 'Turn off passwd auth':
+  path    => [ '/usr/bin', '/bin' ],
+  command => 'sed -i "s/PasswordAuthentication yes/PasswordAuthentication no" /etc/ssh/ssh_config'
 }
-file { 'Declare identity file'}:
-  path => '/etc/ssh/ssh_config',
-  line => 'IdentityFile ~/.ssh/school'
+exec { 'Declare identity file'}:
+  path    => [ '/usr/bin', '/bin' ],
+  command => 'sed -i "/PasswordAuthentication no/a IdentityFile ~/.ssh/school" /etc/ssh/ssh_config'
 }
