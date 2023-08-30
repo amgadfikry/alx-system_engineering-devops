@@ -55,3 +55,13 @@ Requirements:
 - The redirection must be a “301 Moved Permanently”
 - You answer file should be a Bash script containing commands to automatically configure a Ubuntu machine to respect above requirements
 - Using what you did with 1-install_nginx_web_server, write 3-redirection so that it configures a brand new Ubuntu machine to the requirements asked in this task
+
+#### 7-puppet_install_nginx_web_server.pp
+we’d like you to install and configure an Nginx server using Puppet instead of Bash. To save time and effort, you should also include resources in your manifest to perform a 301 redirect when querying /redirect_me.
+
+Requirements:
+
+- Nginx should be listening on port 80
+- When querying Nginx at its root / with a GET request (requesting a page) using curl, it must return a page that contains the string Hello World!
+- The redirection must be a “301 Moved Permanently”
+- Your answer file should be a Puppet manifest containing commands to automatically configure an Ubuntu machine to respect above requirements
