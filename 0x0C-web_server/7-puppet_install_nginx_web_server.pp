@@ -4,24 +4,18 @@ package { 'nginx':
   provider => 'apt_get'
 }
 
-exce { 'run_nginx':
-  path    => [ '/usr/bin', '/bin'],
-  command => 'sudo service nginx start'
-}
-
 file { '/var/www/html/index.html':
   ensure  => 'present',
-  path    => '/var/www/html/index.html',
-  content => 'Hello World!',
-  mode    => '0777'
+  content => 'Hello World!'
 }
 
-exce { 'redirct':
-  path    => [ '/usr/bin', '/bin'],
-  command => 'sudo sed -i "/server_name _;/a \\\trewrite ^/(.*)$ http://www.youtube.com permanent;" /etc/nginx/sites-available/default'
+file_line { 'config':
+  ensure => 'present',
+  path   => '/etc/nginx/sites-available/default',
+  after  => '/server_name _;',
+  line   => 'rewrite ^/(.*)$ http://www.youtube.com permanent;'
 }
 
-exce { 'reload_nginx':
-  path    => [ '/usr/bin', '/bin'],
-  command => 'sudo service nginx reload'
+service { 'nginx':
+  ensure => 'running',
 }
