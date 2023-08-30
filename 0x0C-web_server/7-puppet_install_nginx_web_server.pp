@@ -7,7 +7,7 @@ file_line { 'aaaaa':
   ensure => 'present',
   path   => '/etc/nginx/sites-available/default',
   after  => 'listen 80 default_server;',
-  line   => 'rewrite ^/(.*)$ http://www.youtube.com permanent;',
+  line   => 'rewrite ^/redirect_me https://www.youtube.com permanent;',
 }
 
 file { '/var/www/html/index.html':
