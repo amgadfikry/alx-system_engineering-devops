@@ -8,7 +8,7 @@ echo "Hello World!" | sudo tee /var/www/html/index.html
 echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html
 content=$(cat << 'END_HEREDOC'
 	rewrite ^/redirect_me https://www.youtube.com permanent;
-	add_header X-Served-By $host;
+	add_header X-Served-By $hostname;
 
 	error_page 404 /custom_404.html;
 	location = /custom_404.html {
