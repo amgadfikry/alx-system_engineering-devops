@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+# script that configure web server
+
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo service nginx start
+echo "Hello World!" | sudo tee /var/www/html/index.html
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html
+content=$(cat << 'END_HEREDOC'
+	rewrite ^/redirect_me https://www.youtube.com permanent;
+	add_header X-Served-By $host;
+
+	error_page 404 /custom_404.html;
+	location = /custom_404.html {
+		root /usr/share/nginx/html;
+		internal;
+	}
+END_HEREDOC
+)
+echo -e "$content" >> lines.txt
+sudo sed -i "/server_name _;/r lines.txt" /etc/nginx/sites-available/default
+sudo rm lines.txt
+sudo service nginx reload
