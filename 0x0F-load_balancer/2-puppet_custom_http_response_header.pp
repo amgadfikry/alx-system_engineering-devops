@@ -8,7 +8,7 @@ file_line { 'redirect':
   ensure => 'present',
   path   => '/etc/nginx/sites-available/default',
   after  => 'server_name _;',
-  line   => 'rewrite ^/redirect_me https://www.youtube.com permanent;\nadd_header X-Served-By $hostname;',
+  line   => '\trewrite ^/(.*)$ http://www.youtube.com permanent;\n\tadd_header X-Served-By $hostname;',
 }
 
 file { '/var/www/html/index.html':
