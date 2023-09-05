@@ -4,17 +4,11 @@ package { 'nginx':
   ensure => installed,
 }
 
-file_line { 'redirect':
-  ensure => 'present',
-  path   => '/etc/nginx/sites-available/default',
-  after  => 'server_name _;',
-  line   => '\trewrite ^/(.*)$ http://www.youtube.com permanent;\n\tadd_header X-Served-By $hostname;',
+file_line { 'append a line in nginx config file':
+  path  => '/etc/nginx/nginx.conf'
+  line  => "\tadd_header X-Served-By ${hostname};",
+  after => 'server_name _;'
 }
-
-file { '/var/www/html/index.html':
-  content => 'Hello World!',
-}
-
 service { 'nginx':
   ensure  => running,
   require => Package['nginx'],
