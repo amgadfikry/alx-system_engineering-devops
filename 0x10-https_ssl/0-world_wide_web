@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# script that filter dig command
+subs="www lb-01 web-01 web-02"
+subdomain=$2
+domain=$1
+print_info(){
+	url=$1.$2
+	dig "$url" | grep "^$url" | awk -v s="$1" '{print "The subdomain", s, "is a", $4, "record and points to", $5}'
+}
+if [ "$subdomain" ]; then
+	print_info "$subdomain" "$domain"
+else
+	for i in $subs; do
+		print_info "$i" "$domain"
+	done
+fi
