@@ -50,7 +50,6 @@ Requirements:
 Create a certificate using certbot and configure HAproxy to accept encrypted traffic for your subdomain www..
 
 Requirements:
-
 - HAproxy must be listening on port TCP 443
 - HAproxy must be accepting SSL traffic
 - HAproxy must serve encrypted traffic that will return the / of your web server
