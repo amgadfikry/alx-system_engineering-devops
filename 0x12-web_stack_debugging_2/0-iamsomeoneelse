@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# script know who i am user
+
+sudo -H -u "$1" bash -c 'whoami'
