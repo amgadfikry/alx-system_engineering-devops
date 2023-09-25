@@ -19,7 +19,7 @@ def main():
             if t.get("completed"):
                 done_tasks += 1
                 done_list.append(t.get("title"))
-    print("Employee {} is done with tasks({}/{})".format(
+    print("Employee {} is done with tasks({}/{}):".format(
         user, done_tasks, all_tasks))
     for d in done_list:
         print("\t {}".format(d))
