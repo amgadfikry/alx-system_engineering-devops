@@ -9,7 +9,7 @@ def main():
     url_tasks = "https://jsonplaceholder.typicode.com/todos"
     tasks = get(url_tasks).json()
     url_users = "https://jsonplaceholder.typicode.com/users/{}".format(argv[1])
-    user = get(url_users).json().get("name")
+    user = get(url_users).json().get("username")
     with open("{}.csv".format(argv[1]), "a") as f:
         for t in tasks:
             if t.get("userId") == int(argv[1]):
