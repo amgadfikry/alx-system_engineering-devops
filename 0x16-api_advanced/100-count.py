@@ -3,7 +3,7 @@
 from requests import get
 
 
-def recurse(subreddit, hot_list=[]):
+def count_words(subreddit, word_list, obj={}, after=''):
     """ get all hot posts on provided subreddit
         Params:
             subreddit: subreddit provided to search in it
@@ -11,21 +11,20 @@ def recurse(subreddit, hot_list=[]):
         Return:
             list of all title of posts
     """
-    if len(hot_list) > 0 and hot_list[0].find('after') != -1:
-        after = hot_list[0]
-    else:
-        after = ''
+    if obj == {}:
+        for li in word_list:
+            obj[li] = 0
     url = f'https://www.reddit.com/r/{subreddit}/hot.json{after}'
-    header = {'User-Agent': 'Amgad_fikry_alx_task_2'}
+    header = {'User-Agent': 'Amgad_fikry_alx_task_3'}
     req = get(url, allow_redirects=False, headers=header)
     if req.status_code == 200:
         data = req.json().get('data')
-        if len(hot_list) > 0:
-            hot_list.pop(0)
         posts = data.get('children')
         for post in posts:
-            hot_list.append(post.get('data').get('title'))
+            for li in word_list:
+                if post.get('data').get('title').find(li) != -1:
+                    obj[li] = obj[li] + 1 
         if data.get('after') != 'null':
-            hot_list.insert(0, f'?after={data.get("after")}')
-            recurse(subreddit, hot_list)
-            return hot_list
+            count_words(subreddit, word_list, obj, f'?after={data.get("after")}')
+        print(obj)
+        return ''
