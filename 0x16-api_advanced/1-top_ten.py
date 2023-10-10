@@ -11,12 +11,12 @@ def top_ten(subreddit):
             print ten hot posts if valid subreddit
             or print none if not vaild subreddit
     """
-    url = f'https://www.reddit.com/r/{subreddit}/hot.json?limit=9'
+    url = f'https://www.reddit.com/r/{subreddit}/hot.json'
     header = {'User-Agent': 'Amgad_fikry_alx'}
     req = get(url, allow_redirects=False, headers=header)
     if req.status_code == 200:
         data = req.json().get('data').get('children')
-        for post in data:
-            print(post.get('data').get('title'))
+        for i in range(10):
+            print(data[i].get('data').get('title'))
     else:
         print('None')
