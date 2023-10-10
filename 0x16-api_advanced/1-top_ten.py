@@ -9,7 +9,7 @@ def top_ten(subreddit):
             subreddit: subreddit provided to search in it
     """
     url = f'https://www.reddit.com/r/{subreddit}/hot.json?limit=9'
-    header = {'User-Agent': 'Amgad_fikry_alx'}
+    header = {'User-Agent': 'Amgad_fikry_alx_task1'}
     req = get(url, allow_redirects=False, headers=header)
     if req.status_code == 200:
         data = req.json()
