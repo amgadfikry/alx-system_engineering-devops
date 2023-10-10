@@ -23,8 +23,11 @@ def count_words(subreddit, word_list, obj={}, after=''):
         for post in posts:
             for li in word_list:
                 if post.get('data').get('title').find(li) != -1:
-                    obj[li] = obj[li] + 1 
+                    obj[li] = obj[li] + 1
         if data.get('after') != 'null':
-            count_words(subreddit, word_list, obj, f'?after={data.get("after")}')
+            count_words(subreddit,
+                        word_list,
+                        obj,
+                        f'?after={data.get("after")}')
         print(obj)
         return ''
